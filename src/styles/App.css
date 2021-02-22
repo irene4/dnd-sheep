@@ -1,0 +1,12 @@
+html {
+	background-color: #fbcfe8;
+}
+input {
+	cursor: edit;
+}
+input[type='number'] {
+	text-align: center;
+}
+label {
+	text-align: right;
+}
