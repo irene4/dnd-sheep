@@ -14,7 +14,7 @@ function Card() {
 				<input
 					type="text"
 					className="text-2xl font-bold rounded bg-transparent pl-1"
-					value={characterName}
+					defaultValue={characterName}
 					placeholder="✎ Character Name..."
 				></input>
 				<div className="flex flex-col">
@@ -24,7 +24,7 @@ function Card() {
 						className="text-xs text-gray-600 italic w-full rounded bg-transparent pl-1"
 						placeholder="✎ Alignment..."
 					></input>
-					<div className="grid grid-cols-4 sm:grid-cols-6 items-center w-48 sm:w-72">
+					<div className="stats grid grid-cols-4 sm:grid-cols-6 items-center w-48 sm:w-72">
 						<label className="text-gray-500 font-bold tracking-wider uppercase text-xs p-1">STR</label>
 						<input type="text" className="w-16 rounded p-1 bg-transparent" placeholder="# (±#)"></input>
 						<label className="text-gray-500 font-bold tracking-wider uppercase text-xs p-1">DEX</label>
@@ -38,6 +38,8 @@ function Card() {
 						<label className="text-gray-500 font-bold tracking-wider uppercase text-xs p-1">CHA</label>
 						<input type="text" className="w-16 rounded p-1 bg-transparent" placeholder="# (±#)"></input>
 					</div>
+					<label className="text-gray-500 font-bold tracking-wider uppercase text-xs">Actions</label>
+					<textarea className="text-xs rounded" placeholder="Actions..."></textarea>
 				</div>
 			</div>
 		</div>

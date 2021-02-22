@@ -4,9 +4,6 @@ html {
 input {
 	cursor: edit;
 }
-input[type='number'] {
-	text-align: center;
-}
-label {
+.stats > label {
 	text-align: right;
 }
