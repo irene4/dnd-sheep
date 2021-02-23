@@ -1,9 +1,11 @@
+import Dice from './Dice';
+
 function Card() {
 	const bgColor = 'gray';
 	const characterName = 'Jorge';
 
 	return (
-		<div className={`flex h-72 w-full sm:w-1/2 md:w-1/3 sm:rounded-2xl bg-${bgColor}-200 p-4 pr-8 sm:m-2`}>
+		<div className={`flex h-72 w-full sm:w-1/2 md:w-1/3 sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md`}>
 			<div className="flex flex-col items-center">
 				<img
 					className="rounded-full shadow-md w-5/6 m-1"
@@ -15,6 +17,28 @@ function Card() {
 					<span className="px-1">/</span>
 					<input type="text" className="rounded bg-transparent w-6" placeholder="#" />
 				</span>
+				<Dice />
+				<div className="text-left mt-1">
+					<span className="flex items-center text-xxxs">
+						<span className="text-gray-600 font-bold tracking-wider">Speed</span>
+						<input className="w-4 ml-1" type="text" placeholder="#" />
+					</span>
+					<span className="flex items-center text-xxxs">
+						<span className="text-gray-600 font-bold tracking-wider">Armor Class</span>
+						<input className="w-4 ml-1" type="text" placeholder="#" />
+					</span>
+					<span className="flex items-center text-xxxs">
+						<span className="text-gray-600 font-bold tracking-wider">Hit Dice</span>
+						<select>
+							<option>d20</option>
+							<option>d12</option>
+							<option>d10</option>
+							<option>d8</option>
+							<option>d6</option>
+							<option>d4</option>
+						</select>
+					</span>
+				</div>
 			</div>
 			<div className="w-2/3">
 				<input
@@ -45,7 +69,7 @@ function Card() {
 						<input type="text" className="w-14 rounded bg-transparent" placeholder="# (±#)"></input>
 					</div>
 					<label className="font-bold tracking-wider uppercase text-xs">Actions</label>
-					<textarea className="text-xs rounded-md px-1" placeholder="Actions..."></textarea>
+					<textarea className="text-xs rounded-md px-1 border" placeholder="Actions..."></textarea>
 				</div>
 			</div>
 		</div>
