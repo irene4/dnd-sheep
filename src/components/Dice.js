@@ -1,19 +1,13 @@
-import { useState } from 'react';
-
-function Dice() {
-	const [sides, setSides] = useState(20);
-	const [roll, setRoll] = useState(0);
-
+function Dice({ data, update, updateDice }) {
 	function rollDice() {
-		setRoll(Math.floor(Math.random() * sides + 1));
+		updateDice(Math.floor(Math.random() * data.sides + 1));
 	}
-	function selectSides(e) {
-		setSides(e.target.value);
+	function handleChange(e) {
+		update(e);
 	}
-
 	return (
 		<div className="flex ">
-			<select className="text-xxs" onChange={selectSides} value={sides}>
+			<select id="dice.sides" className="text-xxs" onChange={handleChange} value={data.sides}>
 				<option value="20">d20</option>
 				<option value="12">d12</option>
 				<option value="10">d10</option>
@@ -23,7 +17,9 @@ function Dice() {
 			</select>
 			<div onClick={rollDice} className="select-none" style={{ cursor: 'pointer' }}>
 				<span className="pr-2">🎲</span>
-				<span className="text-purple-500 font-bold">{roll || '?'}</span>
+				<span id="dice.lastRoll" className="text-purple-500 font-bold">
+					{data.lastRoll || '?'}
+				</span>
 			</div>
 		</div>
 	);
