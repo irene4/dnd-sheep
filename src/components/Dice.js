@@ -2,28 +2,28 @@ import { useState } from 'react';
 
 function Dice() {
 	const [sides, setSides] = useState(20);
-	const [role, setRole] = useState(0);
+	const [roll, setRoll] = useState(0);
 
-	function roleDice() {
-		setRole(Math.floor(Math.random() * sides + 1));
+	function rollDice() {
+		setRoll(Math.floor(Math.random() * sides + 1));
 	}
 	function selectSides(e) {
 		setSides(e.target.value);
 	}
 
 	return (
-		<div className="flex items-center">
-			<select onChange={selectSides} value={sides} style={{ fontSize: '.75rem' }}>
-				<option value="20">20</option>
-				<option value="12">12</option>
-				<option value="10">10</option>
-				<option value="8">8</option>
-				<option value="6">6</option>
-				<option value="4">4</option>
+		<div className="flex ">
+			<select className="text-xxs" onChange={selectSides} value={sides}>
+				<option value="20">d20</option>
+				<option value="12">d12</option>
+				<option value="10">d10</option>
+				<option value="8">d8</option>
+				<option value="6">d6</option>
+				<option value="4">d4</option>
 			</select>
-			<div onClick={roleDice} className="select-none" style={{ cursor: 'pointer' }}>
+			<div onClick={rollDice} className="select-none" style={{ cursor: 'pointer' }}>
 				<span className="pr-2">🎲</span>
-				<span className="text-purple-500 font-bold">{role || '?'}</span>
+				<span className="text-purple-500 font-bold">{roll || '?'}</span>
 			</div>
 		</div>
 	);
