@@ -1,75 +1,145 @@
 import Dice from './Dice';
+import useFirestore from '../hooks/useFirestore';
 
-function Card() {
-	const bgColor = 'gray';
-	const characterName = 'Jorge';
+function Card({ data, slug }) {
+	const nopicUrl = 'https://i.imgur.com/ysksdxg.jpg';
+	const { updateField } = useFirestore(slug);
+
+	function update(e) {
+		updateField(data.id, e.target.id, e.target.value);
+	}
+	function updateDice(value) {
+		updateField(data.id, 'dice.lastRoll', value);
+	}
 
 	return (
-		<div className={`flex h-72 w-full sm:w-1/2 md:w-1/3 sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md`}>
+		<div className={`flex h-72 w-full sm:w-1/2 md:w-1/3 lg:w-3/10 sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md`}>
 			<div className="flex flex-col items-center">
-				<img
-					className="rounded-full shadow-md w-5/6 m-1"
-					src="https://scontent-atl3-1.xx.fbcdn.net/v/t1.15752-9/151467208_145327264098759_5141235477982174585_n.png?_nc_cat=111&ccb=3&_nc_sid=ae9488&_nc_ohc=xZko6rj2vgAAX8mhZC0&_nc_ht=scontent-atl3-1.xx&oh=2373c3749fa11cac51b880a65317de78&oe=60570172"
-				/>
+				<img className="rounded-full shadow-md w-5/6 m-1" src={data.url || nopicUrl} alt="Character" />
 				<span className="flex items-center">
 					<label className="text-gray-600 font-bold tracking-wider uppercase text-xs">HP</label>
-					<input type="text" className="font-bold rounded bg-transparent w-6 text-right" placeholder="#" />
+					<input
+						id="hp.curr"
+						value={data.hp.curr}
+						type="text"
+						className="font-bold rounded bg-transparent w-6 text-right"
+						placeholder="#"
+						onChange={update}
+					/>
 					<span className="px-1">/</span>
-					<input type="text" className="rounded bg-transparent w-6" placeholder="#" />
+					<input id="hp.total" value={data.hp.total} type="text" className="rounded bg-transparent w-6" placeholder="#" onChange={update} />
 				</span>
-				<Dice />
+				<Dice data={data.dice || ''} update={update} updateDice={updateDice} />
 				<div className="text-left mt-1">
 					<span className="flex items-center text-xxxs">
-						<span className="text-gray-600 font-bold tracking-wider">Speed</span>
+						<span className="text-gray-500 font-bold tracking-wider">Speed</span>
 						<input className="w-4 ml-1" type="text" placeholder="#" />
 					</span>
 					<span className="flex items-center text-xxxs">
-						<span className="text-gray-600 font-bold tracking-wider">Armor Class</span>
+						<span className="text-gray-500 font-bold tracking-wider">Armor Class</span>
 						<input className="w-4 ml-1" type="text" placeholder="#" />
 					</span>
 					<span className="flex items-center text-xxxs">
-						<span className="text-gray-600 font-bold tracking-wider">Hit Dice</span>
+						<span className="text-gray-500 font-bold tracking-wider">Hit Dice</span>
 						<select>
-							<option>d20</option>
 							<option>d12</option>
 							<option>d10</option>
 							<option>d8</option>
 							<option>d6</option>
-							<option>d4</option>
 						</select>
 					</span>
 				</div>
 			</div>
 			<div className="w-2/3">
 				<input
+					id="name"
+					value={data.name}
 					type="text"
 					className="text-2xl font-bold rounded bg-transparent pl-1 w-full overflow-ellipsis"
-					defaultValue={characterName}
 					placeholder="✎ Character Name..."
+					onChange={update}
 				/>
 				<div className="flex flex-col">
-					<input type="text" className="text-xs text-gray-600 italic w-full rounded bg-transparent pl-1" placeholder="✎ Class..."></input>
 					<input
+						id="class"
+						value={data.class}
+						type="text"
+						className="text-xs text-gray-600 italic w-full rounded bg-transparent pl-1"
+						placeholder="✎ Class..."
+						onChange={update}
+					></input>
+					<input
+						id="alignment"
+						value={data.alignment}
 						type="text"
 						className="text-xs text-gray-600 italic w-full rounded bg-transparent pl-1 mb-1"
 						placeholder="✎ Alignment..."
+						onChange={update}
 					/>
 					<div className="stats grid grid-cols-4 xl:grid-cols-6 items-center w-full mr-2">
 						<label className="text-gray-500 font-bold tracking-wider uppercase text-xs p-1">STR</label>
-						<input type="text" className="w-14 rounded bg-transparent" placeholder="# (±#)"></input>
+						<input
+							id="stats.str"
+							value={data.stats.str}
+							type="text"
+							className="w-14 rounded bg-transparent text-sm"
+							placeholder="# (±#)"
+							onChange={update}
+						></input>
 						<label className="text-gray-500 font-bold tracking-wider uppercase text-xs p-1">DEX</label>
-						<input type="text" className="w-14 rounded bg-transparent" placeholder="# (±#)"></input>
+						<input
+							id="stats.dex"
+							value={data.stats.dex}
+							type="text"
+							className="w-14 rounded bg-transparent text-sm"
+							placeholder="# (±#)"
+							onChange={update}
+						></input>
 						<label className="text-gray-500 font-bold tracking-wider uppercase text-xs p-1">CON</label>
-						<input type="text" className="w-14 rounded bg-transparent" placeholder="# (±#)"></input>
+						<input
+							id="stats.con"
+							value={data.stats.con}
+							type="text"
+							className="w-14 rounded bg-transparent text-sm"
+							placeholder="# (±#)"
+							onChange={update}
+						></input>
 						<label className="text-gray-500 font-bold tracking-wider uppercase text-xs p-1">INT</label>
-						<input type="text" className="w-14 rounded bg-transparent" placeholder="# (±#)"></input>
+						<input
+							id="stats.int"
+							value={data.stats.int}
+							type="text"
+							className="w-14 rounded bg-transparent text-sm"
+							placeholder="# (±#)"
+							onChange={update}
+						></input>
 						<label className="text-gray-500 font-bold tracking-wider uppercase text-xs p-1">WIS</label>
-						<input type="text" className="w-14 rounded bg-transparent" placeholder="# (±#)"></input>
+						<input
+							id="stats.wis"
+							value={data.stats.wis}
+							type="text"
+							className="w-14 rounded bg-transparent text-sm"
+							placeholder="# (±#)"
+							onChange={update}
+						></input>
 						<label className="text-gray-500 font-bold tracking-wider uppercase text-xs p-1">CHA</label>
-						<input type="text" className="w-14 rounded bg-transparent" placeholder="# (±#)"></input>
+						<input
+							id="stats.cha"
+							value={data.stats.cha}
+							type="text"
+							className="w-14 rounded bg-transparent text-sm"
+							placeholder="# (±#)"
+							onChange={update}
+						></input>
 					</div>
 					<label className="font-bold tracking-wider uppercase text-xs">Actions</label>
-					<textarea className="text-xs rounded-md px-1 border" placeholder="Actions..."></textarea>
+					<textarea
+						id="actions"
+						value={data.actions}
+						className="text-xs rounded-md px-1 border"
+						placeholder="Actions..."
+						onChange={update}
+					></textarea>
 				</div>
 			</div>
 		</div>
