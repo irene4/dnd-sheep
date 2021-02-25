@@ -5,7 +5,7 @@ import useFirestore from '../hooks/useFirestore';
 
 function Cards() {
 	let { slug } = useParams();
-	const { roomContent } = useFirestore(slug);
+	const { roomContent, createPlayer } = useFirestore(slug);
 	const [join, setJoin] = useState(false);
 
 	const toggleJoin = () => {
@@ -32,13 +32,20 @@ function Cards() {
 					)}
 				</div>
 			</div>
-			<div className="flex flex-col sm:flex-row sm:flex-wrap h-full justify-center items-center">
-				{roomContent &&
-					roomContent
-						.filter((doc) => doc.type === 'player')
-						.map((player) => {
-							return <Card key={player.id} data={player} />;
-						})}
+
+			<div className="absolute mt-20 flex flex-col justify-end h-3/4 w-full">
+				<button onClick={createPlayer} className="uppercase font-bold text-xs text-gray-100 bg-blue-500 p-1 rounded-md m-auto">
+					+Add player
+				</button>
+
+				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:h-full justify-center items-center">
+					{roomContent &&
+						roomContent
+							.filter((doc) => doc.type === 'player' && doc.active === true)
+							.map((player) => {
+								return <Card key={player.id} data={player} slug={slug} />;
+							})}
+				</div>
 			</div>
 		</div>
 	);
