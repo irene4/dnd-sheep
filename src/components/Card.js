@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Dice from './Dice';
 import useFirestore from '../hooks/useFirestore';
 
 function Card({ data, slug }) {
 	const nopicUrl = 'https://i.imgur.com/ysksdxg.jpg';
 	const { updateField } = useFirestore(slug);
+	const [showUrl, setShowUrl] = useState(false);
+	const urlRef = useRef();
 
 	function update(e) {
 		updateField(data.id, e.target.id, e.target.value);
@@ -17,15 +19,18 @@ function Card({ data, slug }) {
 		<div className={`flex h-72 w-full sm:w-1/2 md:w-1/3 lg:w-3/10 sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md`}>
 			<div className="flex flex-col items-center">
 				<div className="relative max-w-10">
-					<img className="rounded-full shadow-md w-5/6 m-1" src={data.url || nopicUrl} alt="Character" />
-					<input
-						id="url"
-						value={data.url}
-						type="text"
-						className="absolute bottom-1/4 left-1/4 border text-blue-400 rounded shadow"
-						placeholder="Paste an image url here!"
-						onChange={update}
-					/>
+					<img className="rounded-full shadow-md w-5/6 m-1" src={data.url || nopicUrl} alt="Character" onClick={() => setShowUrl(true)} />
+					{showUrl && (
+						<input
+							id="url"
+							value={data.url}
+							type="text"
+							className="absolute bottom-1/4 left-1/4 border text-blue-400 rounded shadow"
+							placeholder="Paste an image url here!"
+							onChange={update}
+							ref={urlRef}
+						/>
+					)}
 				</div>
 				<span className="flex items-center">
 					<label className="text-gray-600 font-bold tracking-wider uppercase text-xs">HP</label>
