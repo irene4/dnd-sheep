@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Dice from './Dice';
 import useFirestore from '../hooks/useFirestore';
 
@@ -14,6 +14,17 @@ function Card({ data, slug }) {
 	function updateDice(value) {
 		updateField(data.id, 'dice.lastRoll', value);
 	}
+	useEffect(() => {
+		let clickOutside = (e) => {
+			if (!urlRef?.current?.contains(e.target)) {
+				setShowUrl(false);
+			}
+		};
+		document.addEventListener('mousedown', clickOutside);
+		return () => {
+			document.removeEventListener('mousedown', clickOutside);
+		};
+	}, []);
 
 	return (
 		<div className={`flex h-72 w-full sm:w-1/2 md:w-1/3 lg:w-3/10 sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md`}>
