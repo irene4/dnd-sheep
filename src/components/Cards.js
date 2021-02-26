@@ -5,12 +5,13 @@ import useFirestore from '../hooks/useFirestore';
 
 function Cards() {
 	let { slug } = useParams();
-	const { roomContent, createPlayer } = useFirestore(slug);
+	const { roomContent, createPlayer, toggleActive } = useFirestore(slug);
 	const [join, setJoin] = useState(false);
 
 	const toggleJoin = () => {
 		setJoin(!join);
 	};
+
 	return (
 		<div className="h-full">
 			<div className="absolute flex justify-center w-full mt-2">
@@ -33,7 +34,16 @@ function Cards() {
 				</div>
 			</div>
 
-			<div className="absolute mt-20 flex flex-col justify-end h-3/4 w-full">
+			<div className="absolute mt-20 flex flex-col justify-end w-full">
+				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:h-full">
+					{roomContent &&
+						roomContent
+							.filter((doc) => doc.type === 'enemy' && doc.active === true)
+							.map((enemy) => {
+								return <h2>Enemy</h2>;
+							})}
+				</div>
+
 				<button onClick={createPlayer} className="uppercase font-bold text-xs text-gray-100 bg-blue-500 p-1 rounded-md m-auto">
 					+Add player
 				</button>
@@ -46,6 +56,29 @@ function Cards() {
 								return <Card key={player.id} data={player} slug={slug} />;
 							})}
 				</div>
+				{roomContent && (
+					<select
+						value="default"
+						onChange={(e) => {
+							toggleActive(e.target.value);
+							e.target.value = 'default';
+						}}
+						className="m-auto text-xs text-gray-400 rounded-md p-1 w-28"
+					>
+						<option value="default" disabled>
+							Reactivate...
+						</option>
+						{roomContent
+							.filter((doc) => doc.type === 'player' && doc.active === false)
+							.map((inactive) => {
+								return (
+									<option value={inactive.id} key={inactive.id}>
+										{inactive.name || inactive.id}
+									</option>
+								);
+							})}
+					</select>
+				)}
 			</div>
 		</div>
 	);
