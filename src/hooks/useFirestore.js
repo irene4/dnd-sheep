@@ -27,7 +27,17 @@ const useFirestore = (room) => {
 		db.collection(room).doc(id).update(newValue);
 	}
 
-	return { roomContent, createPlayer, updateField };
+	function toggleActive(id) {
+		db.collection(room)
+			.doc(id)
+			.get()
+			.then(function (doc) {
+				return doc.ref.update({ active: !doc.data().active });
+			})
+			.catch((err) => console.log('Player not found.'));
+	}
+
+	return { roomContent, createPlayer, updateField, toggleActive };
 };
 
 const newFields = {
