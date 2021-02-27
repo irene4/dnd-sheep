@@ -27,10 +27,15 @@ function Card({ data, slug }) {
 	}, []);
 
 	return (
-		<div className={`flex h-72 w-full sm:w-1/2 md:w-1/3 lg:w-3/10 sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md`}>
-			<div className="flex flex-col items-center">
-				<div className="relative max-w-10">
-					<img className="rounded-full shadow-md w-5/6 m-1" src={data.url || nopicUrl} alt="Character" onClick={() => setShowUrl(true)} />
+		<div className={`flex relative h-72 w-full sm:w-auto sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md`}>
+			<div className="flex flex-col items-center w-5/6 h-5/6">
+				<div className="relative max-w-10 w-40 h-40 sm:w-32 sm:h-32 md:w-40 md:h-40 p-3">
+					<img
+						className="rounded-full shadow-md w-full h-full object-cover"
+						src={data.url || nopicUrl}
+						alt="Character"
+						onClick={() => setShowUrl(true)}
+					/>
 					{showUrl && (
 						<input
 							id="url"
@@ -84,7 +89,7 @@ function Card({ data, slug }) {
 					</span>
 				</div>
 			</div>
-			<div className="w-2/3">
+			<div className="sm:max-w-12">
 				<input
 					id="name"
 					value={data.name}
@@ -110,7 +115,7 @@ function Card({ data, slug }) {
 						placeholder="✎ Alignment..."
 						onChange={update}
 					/>
-					<div className="stats grid grid-cols-4 xl:grid-cols-6 items-center w-full mr-2">
+					<div className="stats grid grid-cols-4 items-center w-full mr-2">
 						<label className="text-gray-500 font-bold tracking-wider uppercase text-xs p-1">STR</label>
 						<input
 							id="stats.str"
@@ -176,6 +181,9 @@ function Card({ data, slug }) {
 					></textarea>
 				</div>
 			</div>
+			<button className="absolute text-sm text-gray-300 top-2 right-4" onClick={() => updateField(data.id, 'active', false)}>
+				x
+			</button>
 		</div>
 	);
 }
