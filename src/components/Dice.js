@@ -6,7 +6,7 @@ function Dice({ data, update, updateDice }) {
 		update(e);
 	}
 	return (
-		<div className="flex ">
+		<div className="flex">
 			<select id="dice.sides" className="text-xxs" onChange={handleChange} value={data.sides}>
 				<option value="20">d20</option>
 				<option value="12">d12</option>
@@ -15,8 +15,8 @@ function Dice({ data, update, updateDice }) {
 				<option value="6">d6</option>
 				<option value="4">d4</option>
 			</select>
-			<div onClick={rollDice} className="select-none" style={{ cursor: 'pointer' }}>
-				<span className="pr-2">🎲</span>
+			<div onClick={rollDice} className="select-none flex flex-nowrap" style={{ cursor: 'pointer' }}>
+				<span className="px-1">🎲</span>
 				<span id="dice.lastRoll" className="text-purple-500 font-bold">
 					{data.lastRoll || '?'}
 				</span>
