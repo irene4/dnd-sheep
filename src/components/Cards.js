@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import Card from './Card';
+import Enemy from './Enemy';
+import AddButton from './AddButton';
 import { useParams } from 'react-router-dom';
 import useFirestore from '../hooks/useFirestore';
 
 function Cards() {
 	let { slug } = useParams();
-	const { roomContent, createPlayer, toggleActive } = useFirestore(slug);
+	const { roomContent, createCard, toggleActive } = useFirestore(slug);
 	const [join, setJoin] = useState(false);
 
 	const toggleJoin = () => {
@@ -35,18 +37,19 @@ function Cards() {
 			</div>
 
 			<div className="absolute mt-20 flex flex-col justify-end w-full">
-				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:h-full">
+				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:h-full sm:m-auto">
 					{roomContent &&
 						roomContent
 							.filter((doc) => doc.type === 'enemy' && doc.active === true)
 							.map((enemy) => {
-								return <h2>Enemy</h2>;
+								return <Enemy key={enemy.id} data={enemy} slug={slug} />;
 							})}
 				</div>
 
-				<button onClick={createPlayer} className="uppercase font-bold text-xs text-gray-100 bg-blue-500 p-1 rounded-md m-auto">
-					+Add player
-				</button>
+				<div className="flex m-auto">
+					<AddButton type="player" color="blue-500" createPlayer={createCard} />
+					<AddButton type="enemy" color="red-500" createPlayer={createCard} />
+				</div>
 
 				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:h-full justify-center items-center">
 					{roomContent &&
@@ -69,11 +72,11 @@ function Cards() {
 							Reactivate...
 						</option>
 						{roomContent
-							.filter((doc) => doc.type === 'player' && doc.active === false)
+							.filter((doc) => doc.type !== 'config' && doc.active === false)
 							.map((inactive) => {
 								return (
 									<option value={inactive.id} key={inactive.id}>
-										{inactive.name || inactive.id}
+										{inactive.name || inactive.id} ({inactive.type})
 									</option>
 								);
 							})}
