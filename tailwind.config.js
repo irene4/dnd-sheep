@@ -5,7 +5,19 @@ module.exports = {
 		fontFamily: {
 			sans: ['Avenir', 'Arial', 'sans-serif'],
 		},
-		extend: {},
+		extend: {
+			fontSize: {
+				xxxs: '.6rem',
+				xxs: '.7rem',
+			},
+			width: {
+				'3/10': '30%',
+			},
+			maxWidth: {
+				10: '10rem',
+				12: '12rem',
+			},
+		},
 	},
 	variants: {
 		extend: {},
