@@ -15,10 +15,10 @@ const useFirestore = (room) => {
 		return () => cleanup();
 	}, [room]);
 
-	function createPlayer() {
+	function createCard(type) {
 		db.collection(room)
 			.doc()
-			.set({ ...newFields, type: 'player', active: true });
+			.set({ ...newFields[type], type: type, active: true });
 	}
 
 	function updateField(id, field, value) {
@@ -36,33 +36,46 @@ const useFirestore = (room) => {
 			})
 			.catch((err) => console.log('Player not found.'));
 	}
-
-	return { roomContent, createPlayer, updateField, toggleActive };
+	return { roomContent, createCard, updateField, toggleActive };
 };
 
 const newFields = {
-	name: '',
-	class: '',
-	alignment: '',
-	stats: {
-		str: '',
-		dex: '',
-		con: '',
-		int: '',
-		wis: '',
-		cha: '',
+	player: {
+		name: '',
+		class: '',
+		alignment: '',
+		stats: {
+			str: '',
+			dex: '',
+			con: '',
+			int: '',
+			wis: '',
+			cha: '',
+		},
+		actions: '',
+		notes: '',
+		hp: {
+			total: 0,
+			curr: 0,
+		},
+		dice: {
+			lastRoll: 0,
+			sides: 20,
+		},
+		url: '',
 	},
-	actions: '',
-	notes: '',
-	hp: {
-		total: 0,
-		curr: 0,
+	enemy: {
+		name: '',
+		class: '',
+		type: '',
+		status: '',
+		notes: '',
+		dice: {
+			lastRoll: 0,
+			sides: 20,
+		},
+		url: '',
 	},
-	dice: {
-		lastRoll: 0,
-		sides: 20,
-	},
-	url: '',
 };
 
 export default useFirestore;
