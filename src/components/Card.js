@@ -27,7 +27,7 @@ function Card({ data, slug }) {
 	}, []);
 
 	return (
-		<div className={`flex relative h-72 w-full sm:w-auto sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md`}>
+		<div className="flex relative h-72 w-full sm:w-auto sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md">
 			<div className="flex flex-col items-center w-5/6 h-5/6">
 				<div className="relative max-w-10 w-40 h-40 sm:w-32 sm:h-32 md:w-40 md:h-40 p-3">
 					<img
