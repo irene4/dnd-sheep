@@ -55,8 +55,8 @@ const newFields = {
 		actions: '',
 		notes: '',
 		hp: {
-			total: 0,
-			curr: 0,
+			total: null,
+			curr: null,
 		},
 		dice: {
 			lastRoll: 0,
