@@ -1,16 +1,18 @@
 import { useState } from 'react';
 
-function ColorPicker({ color }) {
+function ColorPicker() {
 	const [isOpen, setIsOpen] = useState(false);
-	const colors = ['#2196F3', '#009688', '#9C27B0', '#FFEB3B', '#afbbc9', '#4CAF50', '#2d3748', '#f56565', '#ed64a6'];
+	const colors = ['antiquewhite', '#2d3748', '#009688', '#afbbc9', '#9C27B0', '#FFEB3B', '#4CAF50', '#f22c54'];
+	let [color, setColor] = useState('antiquewhite');
+	document.body.style = `background: ${color};`;
 
 	return (
-		<div className="relative">
+		<div className="relative m-2">
 			<div class="flex">
 				<button
 					type="button"
-					class="w-10 h-10 border rounded-full focus:outline-none focus:shadow-outline inline-flex p-2 shadow"
-					style={{ background: `${color}`, color: 'white' }}
+					class="w-10 h-10 border border-black rounded-full focus:outline-none focus:shadow-outline inline-flex p-2 shadow"
+					style={{ background: `${color}` }}
 					onClick={() => setIsOpen(!isOpen)}
 				>
 					<svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -19,11 +21,18 @@ function ColorPicker({ color }) {
 					</svg>
 				</button>
 				{isOpen && (
-					<div className="absolute z-50 left-12 bg-white rounded-lg shadow">
-						<div className="flex p-1">
+					<div className="absolute z-50 top-12 sm:top-0 sm:left-12 bg-white rounded-lg shadow">
+						<div className="sm:flex p-1">
 							{colors.map((color) => {
-								return <div className="w-5 h-5 rounded-full m-1" style={{ background: color }}></div>;
+								return (
+									<div
+										className="w-5 h-5 rounded-full m-1"
+										style={{ background: color, cursor: 'pointer' }}
+										onClick={() => setColor(color)}
+									></div>
+								);
 							})}
+							<input className="rounded h-6 w-6" type="color" value={color} onChange={(e) => setColor(e.target.value)} />
 						</div>
 					</div>
 				)}
