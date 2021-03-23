@@ -8,31 +8,35 @@ import useFirestore from '../hooks/useFirestore';
 function Cards() {
 	let { slug } = useParams();
 	const { roomContent, createCard, toggleActive } = useFirestore(slug);
-	const [join, setJoin] = useState(false);
+	let [color, setColor] = useState('antiquewhite');
+	// const [join, setJoin] = useState(false);
 
-	const toggleJoin = () => {
-		setJoin(!join);
-	};
+	// const toggleJoin = () => {
+	// 	setJoin(!join);
+	// };
 
 	return (
-		<div className="h-full">
+		<div className="h-full" style={{ backgroundColor: `${color}` }}>
 			<div className="absolute flex justify-center w-full mt-2">
 				<div>
 					<div className="flex items-center">
-						<h2 className="font-bold capitalize text-3xl text-center text-blue-800 rounded p-1">{slug}</h2>
-						<button
+						<h2 id="roomSlug" className="font-bold capitalize text-3xl text-center text-blue-800 rounded p-1">
+							{slug}
+						</h2>
+						<input className="rounded h-6 w-6" type="color" value={color} onChange={(e) => setColor(e.target.value)} />
+						{/* <button
 							className="bg-green-500 text-gray-100 font-bold tracking-wider uppercase text-xs rounded px-2 h-8"
 							onClick={toggleJoin}
 						>
 							Join
-						</button>
+						</button> */}
 					</div>
-					{join && (
+					{/* {join && (
 						<form>
 							<input type="text" className="w-20 rounded mx-1 pl-1" placeholder="Password" />
 							<button>Go</button>
 						</form>
-					)}
+					)} */}
 				</div>
 			</div>
 
