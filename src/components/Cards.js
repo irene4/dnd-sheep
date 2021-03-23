@@ -4,26 +4,25 @@ import Enemy from './Enemy';
 import AddButton from './AddButton';
 import { useParams } from 'react-router-dom';
 import useFirestore from '../hooks/useFirestore';
+import ColorPicker from './ColorPicker';
 
 function Cards() {
 	let { slug } = useParams();
 	const { roomContent, createCard, toggleActive } = useFirestore(slug);
-	let [color, setColor] = useState('antiquewhite');
 	// const [join, setJoin] = useState(false);
-
 	// const toggleJoin = () => {
 	// 	setJoin(!join);
 	// };
-
 	return (
-		<div className="h-full" style={{ backgroundColor: `${color}` }}>
-			<div className="absolute flex justify-center w-full mt-2">
+		<div className="pb-2">
+			<div className="flex justify-center w-full mt-2">
 				<div>
 					<div className="flex items-center">
 						<h2 id="roomSlug" className="font-bold capitalize text-3xl text-center text-blue-800 rounded p-1">
 							{slug}
 						</h2>
-						<input className="rounded h-6 w-6" type="color" value={color} onChange={(e) => setColor(e.target.value)} />
+						<ColorPicker />
+						{/* <input className="rounded h-6 w-6" type="color" value={color} onChange={(e) => setColor(e.target.value)} /> */}
 						{/* <button
 							className="bg-green-500 text-gray-100 font-bold tracking-wider uppercase text-xs rounded px-2 h-8"
 							onClick={toggleJoin}
@@ -40,7 +39,7 @@ function Cards() {
 				</div>
 			</div>
 
-			<div className="absolute mt-20 flex flex-col justify-end w-full">
+			<div className="flex flex-col justify-end w-full">
 				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:h-full sm:m-auto">
 					{roomContent &&
 						roomContent
