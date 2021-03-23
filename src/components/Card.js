@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Dice from './Dice';
 import useFirestore from '../hooks/useFirestore';
+import ProgressBar from './ProgressBar';
 
 function Card({ data, slug }) {
 	const nopicUrl = 'https://i.imgur.com/ysksdxg.jpg';
@@ -52,22 +53,17 @@ function Card({ data, slug }) {
 					<label className="text-gray-600 font-bold tracking-wider uppercase text-xs">HP</label>
 					<input
 						id="hp.curr"
-						value={data.hp.curr || '#'}
+						value={data.hp.curr}
 						type="text"
 						className="font-bold rounded bg-transparent w-6 text-right"
 						placeholder="#"
 						onChange={update}
+						//onFocus={() => console.log('Focus')}
 					/>
 					<span className="px-1">/</span>
-					<input
-						id="hp.total"
-						value={data.hp.total || '#'}
-						type="text"
-						className="rounded bg-transparent w-6"
-						placeholder="#"
-						onChange={update}
-					/>
+					<input id="hp.total" value={data.hp.total} type="text" className="rounded bg-transparent w-6" placeholder="#" onChange={update} />
 				</span>
+				<ProgressBar curr={data.hp.curr} tot={data.hp.total} />
 				<Dice data={data.dice || ''} update={update} updateDice={updateDice} />
 				<div className="text-left mt-1">
 					<span className="flex items-center text-xxxs">
