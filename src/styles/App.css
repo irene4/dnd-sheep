@@ -12,3 +12,14 @@ input {
 	color: white;
 	text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
+
+.tooltipped-btn:hover .tooltip {
+	display: block;
+} 
+
+.tooltip {
+	position: absolute;
+	bottom: 1.75rem; 
+	display: none;
+  /* display: none; */
+}

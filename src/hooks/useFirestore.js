@@ -36,7 +36,11 @@ const useFirestore = (room) => {
 			})
 			.catch((err) => console.log('Player not found.'));
 	}
-	return { roomContent, createCard, updateField, toggleActive };
+
+	function deleteDocument(id) {
+		db.collection(room).doc(id).delete();
+	}
+	return { roomContent, createCard, updateField, toggleActive, deleteDocument };
 };
 
 const newFields = {
