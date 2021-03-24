@@ -60,41 +60,45 @@ function Cards() {
 									);
 								})}
 						</select>
-						<div
-							className="tooltipped-btn h-6 w-6 bg-blue-500 hover:bg-blue-600 text-white rounded p-1 relative"
-							onClick={() => {
-								const val = selectEl.current.value;
-								if (val !== 'default') {
-									toggleActive(val);
-									selectEl.current.value = 'default';
-								}
-							}}
-						>
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
-							</svg>
-							<Tooltip text="Restore" sz="sm" />
-						</div>
-						<div
-							className="tooltipped-btn h-6 w-6 bg-red-500 hover:bg-red-600 text-white rounded p-1 relative"
-							onClick={() => {
-								const val = selectEl.current.value;
-								if (val !== 'default') {
-									deleteDocument(val);
-									selectEl.current.value = 'default';
-								}
-							}}
-						>
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-								/>
-							</svg>
-							<Tooltip text="Destroy" sz="sm" />
-						</div>
+
+						<Tooltip text="Restore" sz="sm">
+							<div
+								className="tooltipped h-6 w-6 bg-blue-500 hover:bg-blue-600 text-white rounded p-1"
+								onClick={() => {
+									const val = selectEl.current.value;
+									if (val !== 'default') {
+										toggleActive(val);
+										selectEl.current.value = 'default';
+									}
+								}}
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+								</svg>
+							</div>
+						</Tooltip>
+						<Tooltip text="Destroy" sz="sm">
+							<div
+								className="tooltipped h-6 w-6 bg-red-500 hover:bg-red-600 text-white rounded p-1"
+								onClick={() => {
+									const val = selectEl.current.value;
+									if (val !== 'default') {
+										deleteDocument(val);
+										selectEl.current.value = 'default';
+									}
+								}}
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+									/>
+								</svg>
+
+							</div>
+						</Tooltip>
 					</div>
 				)}
 			</div>

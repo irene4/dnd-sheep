@@ -9,10 +9,11 @@ input {
 	color: white;
 	text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
-.tooltipped-btn {
+.tooltipped {
+	position: relative;
 	cursor: pointer;
 }
-.tooltipped-btn:hover .tooltip {
+.tooltipped:hover .tooltip {
 	display: block;
 }
 .tooltip {
