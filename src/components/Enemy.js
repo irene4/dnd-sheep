@@ -32,7 +32,10 @@ function Enemy({ data, slug }) {
 			<span className="pl-1 pr-2 bg-white rounded">
 				<Dice data={data.dice || ''} update={update} updateDice={updateDice} />
 			</span>
-			<button className="absolute text-sm text-yellow-200 top-2 right-2" onClick={() => updateField(data.id, 'active', false)}>
+			<button
+				className="absolute text-sm text-yellow-200 hover:text-yellow-300 top-2 right-2"
+				onClick={() => updateField(data.id, 'active', false)}
+			>
 				<svg className="w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 					<path
 						fillRule="evenodd"

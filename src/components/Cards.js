@@ -34,8 +34,8 @@ function Cards() {
 				</div>
 
 				<div className="flex m-auto">
-					<AddButton type="player" color="blue-500" createPlayer={createCard} />
-					<AddButton type="enemy" color="red-500" createPlayer={createCard} />
+					<AddButton type="player" color="blue" createPlayer={createCard} />
+					<AddButton type="enemy" color="red" createPlayer={createCard} />
 				</div>
 
 				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:h-full justify-center items-center">
@@ -61,7 +61,7 @@ function Cards() {
 								})}
 						</select>
 						<div
-							className="tooltipped-btn h-6 w-6 bg-blue-500 text-white rounded p-1 relative"
+							className="tooltipped-btn h-6 w-6 bg-blue-500 hover:bg-blue-600 text-white rounded p-1 relative"
 							onClick={() => {
 								const val = selectEl.current.value;
 								if (val !== 'default') {
@@ -76,7 +76,7 @@ function Cards() {
 							<Tooltip text="Restore" sz="sm" />
 						</div>
 						<div
-							className="tooltipped-btn h-6 w-6 bg-red-500 text-white rounded p-1 relative"
+							className="tooltipped-btn h-6 w-6 bg-red-500 hover:bg-red-600 text-white rounded p-1 relative"
 							onClick={() => {
 								const val = selectEl.current.value;
 								if (val !== 'default') {

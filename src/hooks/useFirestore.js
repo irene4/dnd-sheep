@@ -60,6 +60,7 @@ const newFields = {
 		},
 		actions: '',
 		notes: '',
+		status: '',
 		hp: {
 			total: null,
 			curr: null,
