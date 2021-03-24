@@ -1,42 +1,25 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import Card from './Card';
 import Enemy from './Enemy';
 import AddButton from './AddButton';
-import { useParams } from 'react-router-dom';
-import useFirestore from '../hooks/useFirestore';
 import ColorPicker from './ColorPicker';
+import Tooltip from './Tooltip';
+import useFirestore from '../hooks/useFirestore';
 
 function Cards() {
 	let { slug } = useParams();
 	const { roomContent, createCard, toggleActive, deleteDocument } = useFirestore(slug);
-	// const [join, setJoin] = useState(false);
-	// const toggleJoin = () => {
-	// 	setJoin(!join);
-	// };
 	const selectEl = useRef(null);
+
 	return (
 		<div className="pb-2">
 			<div className="flex justify-center w-full mt-2">
-				<div>
-					<div className="flex items-center">
-						<h2 id="roomSlug" className="font-bold capitalize text-3xl text-center text-blue-800 rounded p-1">
-							{slug}
-						</h2>
-						<ColorPicker />
-						{/* <input className="rounded h-6 w-6" type="color" value={color} onChange={(e) => setColor(e.target.value)} /> */}
-						{/* <button
-							className="bg-green-500 text-gray-100 font-bold tracking-wider uppercase text-xs rounded px-2 h-8"
-							onClick={toggleJoin}
-						>
-							Join
-						</button> */}
-					</div>
-					{/* {join && (
-						<form>
-							<input type="text" className="w-20 rounded mx-1 pl-1" placeholder="Password" />
-							<button>Go</button>
-						</form>
-					)} */}
+				<div className="flex items-center">
+					<h2 id="roomSlug" className="font-bold capitalize text-3xl text-center text-blue-800 rounded p-1">
+						{slug}
+					</h2>
+					<ColorPicker />
 				</div>
 			</div>
 
@@ -66,9 +49,7 @@ function Cards() {
 				{roomContent && (
 					<div className="flex flex-row justify-center space-x-2">
 						<select ref={selectEl} defaultValue="default" className="text-xs text-gray-400 rounded-md p-1 w-36">
-							<option value="default" disabled>
-								Restore or destroy...
-							</option>
+							<option value="default">Restore or destroy...</option>
 							{roomContent
 								.filter((doc) => doc.type !== 'config' && doc.active === false)
 								.map((inactive) => {
@@ -92,7 +73,7 @@ function Cards() {
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
 							</svg>
-							<div className="tooltip p-1 text-sm rounded">Restore</div>
+							<Tooltip text="Restore" sz="sm" />
 						</div>
 						<div
 							className="tooltipped-btn h-6 w-6 bg-red-500 text-white rounded p-1 relative"
@@ -112,7 +93,7 @@ function Cards() {
 									d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
 								/>
 							</svg>
-							<div className="tooltip p-1 text-sm rounded">Destroy</div>
+							<Tooltip text="Destroy" sz="sm" />
 						</div>
 					</div>
 				)}
