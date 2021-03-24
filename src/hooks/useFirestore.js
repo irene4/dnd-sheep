@@ -21,6 +21,10 @@ const useFirestore = (room) => {
 			.set({ ...newFields[type], type: type, active: true });
 	}
 
+	function deleteDocument(id) {
+		db.collection(room).doc(id).delete();
+	}
+
 	function updateField(id, field, value) {
 		let newValue = {};
 		newValue[field] = value;
@@ -37,9 +41,6 @@ const useFirestore = (room) => {
 			.catch((err) => console.log('Player not found.'));
 	}
 
-	function deleteDocument(id) {
-		db.collection(room).doc(id).delete();
-	}
 	return { roomContent, createCard, updateField, toggleActive, deleteDocument };
 };
 
