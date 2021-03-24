@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function Dice({ data, update, updateDice }) {
+	const initialMount = useRef(true);
 	const [rollColor, setRollColor] = useState('purple-500');
 	function rollDice() {
 		updateDice(Math.floor(Math.random() * data.sides + 1));
@@ -9,11 +10,15 @@ function Dice({ data, update, updateDice }) {
 		update(e);
 	}
 	useEffect(() => {
-		setRollColor('blue-400');
-		const timer = setTimeout(() => {
-			setRollColor('purple-500');
-		}, 4000);
-		return () => clearTimeout(timer);
+		if (initialMount.current) {
+			initialMount.current = false;
+		} else {
+			setRollColor('blue-400');
+			const timer = setTimeout(() => {
+				setRollColor('purple-500');
+			}, 4000);
+			return () => clearTimeout(timer);
+		}
 	}, [data.lastRoll]);
 
 	return (
