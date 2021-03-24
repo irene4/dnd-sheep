@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 function ColorPicker() {
 	const [isOpen, setIsOpen] = useState(false);
-	const colors = ['antiquewhite', '#2d3748', '#009688', '#afbbc9', '#9C27B0', '#FFEB3B', '#4CAF50', '#f22c54'];
 	let [color, setColor] = useState('antiquewhite');
+	const colorSelectRef = useRef(null);
+	const colors = ['antiquewhite', '#2d3748', '#009688', '#afbbc9', '#9C27B0', '#FFEB3B', '#4CAF50', '#f22c54'];
 	document.body.style = `background: ${color};`;
 
 	return (
 		<div className="relative m-2">
 			<div className="flex">
 				<button
-					type="button"
 					className="w-10 h-10 border border-black rounded-full focus:outline-none focus:shadow-outline inline-flex p-2 shadow"
 					style={{ background: `${color}` }}
 					onClick={() => setIsOpen(!isOpen)}
@@ -23,16 +23,35 @@ function ColorPicker() {
 				{isOpen && (
 					<div className="absolute z-50 top-12 sm:top-0 sm:left-12 bg-white rounded-lg shadow">
 						<div className="sm:flex p-1">
-							{colors.map((color) => {
+							{colors.map((thisColor) => {
 								return (
 									<div
-										className="w-5 h-5 rounded-full m-1"
-										style={{ background: color, cursor: 'pointer' }}
-										onClick={() => setColor(color)}
+										className={thisColor === color ? 'w-5 h-5 rounded-full m-1 ring ring-gray-300' : 'w-5 h-5 rounded-full m-1'}
+										style={{ background: thisColor, cursor: 'pointer' }}
+										onClick={() => setColor(thisColor)}
 									></div>
 								);
 							})}
-							<input className="rounded h-6 w-6" type="color" value={color} onChange={(e) => setColor(e.target.value)} />
+							<input
+								ref={colorSelectRef}
+								className="sr-only bottom-0"
+								type="color"
+								value={color}
+								onChange={(e) => setColor(e.target.value)}
+							/>
+							<div
+								className="w-5 h-5 rounded-full m-1"
+								style={{ cursor: 'pointer' }}
+								onClick={() => (colorSelectRef.current !== null ? colorSelectRef.current.click() : console.log('Error'))}
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill={color} stroke="gray">
+									<path
+										fillRule="evenodd"
+										d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+										clipRule="evenodd"
+									/>
+								</svg>
+							</div>
 						</div>
 					</div>
 				)}
