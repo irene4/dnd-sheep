@@ -65,9 +65,9 @@ function Cards() {
 				</div>
 				{roomContent && (
 					<div className="flex flex-row justify-center space-x-2">
-						<select ref={selectEl} className="text-xs text-gray-400 rounded-md p-1 w-28">
+						<select ref={selectEl} defaultValue="default" className="text-xs text-gray-400 rounded-md p-1 w-36">
 							<option value="default" disabled>
-								Select object...
+								Restore or destroy...
 							</option>
 							{roomContent
 								.filter((doc) => doc.type !== 'config' && doc.active === false)
@@ -92,8 +92,7 @@ function Cards() {
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
 							</svg>
-
-							<div className="p-1 tooltip bg-black rounded">Restore</div>
+							<div className="tooltip p-1 text-sm rounded">Restore</div>
 						</div>
 						<div
 							className="tooltipped-btn h-6 w-6 bg-red-500 text-white rounded p-1 relative"
@@ -113,7 +112,7 @@ function Cards() {
 									d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
 								/>
 							</svg>
-							<div className="p-1 tooltip bg-black rounded">Permadelete</div>
+							<div className="tooltip p-1 text-sm rounded">Destroy</div>
 						</div>
 					</div>
 				)}
