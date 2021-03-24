@@ -9,8 +9,10 @@ function App() {
 			<Router>
 				<Switch>
 					<Route exact path="/">
-						<h1 className="m-1 text-xl">Join a room by adding its /[Room Name] to the URL!</h1>
-						<CodeInput />
+						<div className="flex flex-col h-full w-full items-center justify-around">
+							<h1 className="m-1 font-bold text-2xl">Join a room by adding its /[Room Name] to the URL!</h1>
+							{/* <CodeInput /> */}
+						</div>
 					</Route>
 					<Route path="/:slug">
 						<Cards />
