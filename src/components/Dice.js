@@ -1,10 +1,21 @@
+import { useState, useEffect } from 'react';
+
 function Dice({ data, update, updateDice }) {
+	const [rollColor, setRollColor] = useState('purple-500');
 	function rollDice() {
 		updateDice(Math.floor(Math.random() * data.sides + 1));
 	}
 	function handleChange(e) {
 		update(e);
 	}
+	useEffect(() => {
+		setRollColor('blue-400');
+		const timer = setTimeout(() => {
+			setRollColor('purple-500');
+		}, 4000);
+		return () => clearTimeout(timer);
+	}, [data.lastRoll]);
+
 	return (
 		<div className="flex">
 			<select id="dice.sides" className="text-xxs" onChange={handleChange} value={data.sides}>
@@ -17,7 +28,7 @@ function Dice({ data, update, updateDice }) {
 			</select>
 			<div onClick={rollDice} className="select-none flex flex-nowrap" style={{ cursor: 'pointer' }}>
 				<span className="px-1">🎲</span>
-				<span id="dice.lastRoll" className="text-purple-500 font-bold">
+				<span id="dice.lastRoll" className={`text-${rollColor} font-bold`}>
 					{data.lastRoll || '?'}
 				</span>
 			</div>
