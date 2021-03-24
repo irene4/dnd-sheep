@@ -4,6 +4,7 @@ import { db } from '../firebase/config';
 const useFirestore = (room) => {
 	const [roomContent, setRoomContent] = useState([]);
 
+	//db.collection(room).doc().set({ type: 'config', color: 'antiquewhite' });
 	useEffect(() => {
 		const cleanup = db.collection(room).onSnapshot((snap) => {
 			let content = [];
@@ -17,7 +18,7 @@ const useFirestore = (room) => {
 
 	function createCard(type) {
 		db.collection(room)
-			.doc()
+			.doc(Date.now().toString())
 			.set({ ...newFields[type], type: type, active: true });
 	}
 
