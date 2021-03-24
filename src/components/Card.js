@@ -175,6 +175,14 @@ function Card({ data, slug }) {
 						placeholder="Actions..."
 						onChange={update}
 					></textarea>
+					<label className="font-bold tracking-wider uppercase text-xs">Notes</label>
+					<textarea
+						id="notes"
+						value={data.notes}
+						className="text-xs rounded-md px-1 border"
+						placeholder="Notes..."
+						onChange={update}
+					></textarea>
 				</div>
 			</div>
 			<button className="absolute text-sm text-gray-300 top-2 right-4" onClick={() => updateField(data.id, 'active', false)}>
