@@ -31,25 +31,26 @@ function Card({ data, slug }) {
 	return (
 		<div className="flex relative w-full sm:w-auto sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md">
 			<div className="flex flex-col items-center w-5/6 h-5/6">
-				<div className="tooltipped flex h-4 text-xxs text-gray-400 align-left">
-					<svg className="h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-						<path
-							fillRule="evenodd"
-							d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z"
-							clipRule="evenodd"
-						/>
-					</svg>
+				<Tooltip text={data.status} enabled={data.status?.length > 15}>
+					<div className="flex h-4 text-xxs text-gray-400 align-left">
+						<svg className="h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+							<path
+								fillRule="evenodd"
+								d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z"
+								clipRule="evenodd"
+							/>
+						</svg>
 
-					<input
-						id="status"
-						value={data.status}
-						className="border rounded-full pl-2 pt-1 w-28 overflow-ellipsis"
-						type="text"
-						placeholder="...."
-						onChange={update}
-					></input>
-					{data.status?.length > 15 && <Tooltip text={data.status} sz="xxxs" />}
-				</div>
+						<input
+							id="status"
+							value={data.status}
+							className="border rounded-full pl-2 pt-1 w-28 overflow-ellipsis"
+							type="text"
+							placeholder="...."
+							onChange={update}
+						></input>
+					</div>
+				</Tooltip>
 				<div className="relative max-w-10 w-40 h-40 sm:w-32 sm:h-32 md:w-40 md:h-40 p-2">
 					<img
 						className="rounded-full shadow-md w-full h-full object-cover"
