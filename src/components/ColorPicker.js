@@ -26,6 +26,7 @@ function ColorPicker() {
 							{colors.map((thisColor) => {
 								return (
 									<div
+										key={thisColor}
 										className={thisColor === color ? 'w-5 h-5 rounded-full m-1 ring ring-gray-300' : 'w-5 h-5 rounded-full m-1'}
 										style={{ background: thisColor, cursor: 'pointer' }}
 										onClick={() => setColor(thisColor)}

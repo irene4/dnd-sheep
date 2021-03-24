@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Dice from './Dice';
-import useFirestore from '../hooks/useFirestore';
 import ProgressBar from './ProgressBar';
+import Tooltip from './Tooltip';
+import useFirestore from '../hooks/useFirestore';
 
 function Card({ data, slug }) {
 	const nopicUrl = 'https://i.imgur.com/ysksdxg.jpg';
@@ -30,7 +31,7 @@ function Card({ data, slug }) {
 	return (
 		<div className="flex relative w-full sm:w-auto sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md">
 			<div className="flex flex-col items-center w-5/6 h-5/6">
-				<div className="flex h-4 text-xxs text-gray-400 align-left">
+				<div className="tooltipped flex h-4 text-xxs text-gray-400 align-left">
 					<svg className="h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 						<path
 							fillRule="evenodd"
@@ -38,14 +39,16 @@ function Card({ data, slug }) {
 							clipRule="evenodd"
 						/>
 					</svg>
+
 					<input
 						id="status"
 						value={data.status}
-						className="border rounded-full px-2 pt-1 w-28"
+						className="border rounded-full pl-2 pt-1 w-28 overflow-ellipsis"
 						type="text"
 						placeholder="...."
 						onChange={update}
 					></input>
+					{data.status?.length > 15 && <Tooltip text={data.status} sz="xxxs" />}
 				</div>
 				<div className="relative max-w-10 w-40 h-40 sm:w-32 sm:h-32 md:w-40 md:h-40 p-2">
 					<img
@@ -59,7 +62,7 @@ function Card({ data, slug }) {
 							id="url"
 							value={data.url}
 							type="text"
-							className="absolute bottom-1/4 left-1/4 border text-blue-400 rounded shadow"
+							className="absolute tooltipped-btn bottom-1/4 left-1/4 border text-blue-400 rounded shadow"
 							placeholder="Paste an image url here!"
 							onChange={update}
 							ref={urlRef}

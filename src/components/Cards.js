@@ -61,7 +61,7 @@ function Cards() {
 								})}
 						</select>
 						<div
-							className="tooltipped-btn h-6 w-6 bg-blue-500 hover:bg-blue-600 text-white rounded p-1 relative"
+							className="tooltipped h-6 w-6 bg-blue-500 hover:bg-blue-600 text-white rounded p-1"
 							onClick={() => {
 								const val = selectEl.current.value;
 								if (val !== 'default') {
@@ -76,7 +76,7 @@ function Cards() {
 							<Tooltip text="Restore" sz="sm" />
 						</div>
 						<div
-							className="tooltipped-btn h-6 w-6 bg-red-500 hover:bg-red-600 text-white rounded p-1 relative"
+							className="tooltipped h-6 w-6 bg-red-500 hover:bg-red-600 text-white rounded p-1"
 							onClick={() => {
 								const val = selectEl.current.value;
 								if (val !== 'default') {
