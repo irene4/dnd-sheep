@@ -9,7 +9,9 @@ import useFirestore from '../hooks/useFirestore';
 
 function Cards() {
 	let { slug } = useParams();
-	const { roomContent, createCard, toggleActive, deleteDocument } = useFirestore(slug);
+	const { roomContent, createCard, toggleActive, deleteDocument, createConfigIfNotExists } = useFirestore(slug);
+
+	createConfigIfNotExists();
 	const selectEl = useRef(null);
 
 	return (
@@ -19,7 +21,7 @@ function Cards() {
 					<h2 id="roomSlug" className="font-bold capitalize text-3xl text-center text-blue-800 rounded p-1">
 						{slug}
 					</h2>
-					<ColorPicker />
+					<ColorPicker slug={slug} data={roomContent.find(doc => doc.type === 'config')} />
 				</div>
 			</div>
 

@@ -4,7 +4,17 @@ import { db } from '../firebase/config';
 const useFirestore = (room) => {
 	const [roomContent, setRoomContent] = useState([]);
 
-	//db.collection(room).doc().set({ type: 'config', color: 'antiquewhite' });
+	function createConfigIfNotExists() {
+		db.collection(room).doc('config').get().then(config => {
+			if (!config.exists) {
+				db.collection(room).doc('config').set({
+					type: 'config',
+					backgroundColor: 'antiquewhite',
+				});
+			}
+		});
+	}
+
 	useEffect(() => {
 		const cleanup = db.collection(room).onSnapshot((snap) => {
 			let content = [];
@@ -13,6 +23,7 @@ const useFirestore = (room) => {
 			});
 			setRoomContent(content);
 		});
+
 		return () => cleanup();
 	}, [room]);
 
@@ -42,7 +53,7 @@ const useFirestore = (room) => {
 			.catch((err) => console.log('Player not found.'));
 	}
 
-	return { roomContent, createCard, updateField, toggleActive, deleteDocument };
+	return { roomContent, createCard, updateField, toggleActive, deleteDocument, createConfigIfNotExists };
 };
 
 const newFields = {

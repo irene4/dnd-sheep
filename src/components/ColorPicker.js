@@ -1,18 +1,21 @@
 import { useState, useRef } from 'react';
+import useFirestore from '../hooks/useFirestore';
 
-function ColorPicker() {
+function ColorPicker({ data, slug }) {
+	data = data || { backgroundColor: 'antiquewhite'};
+	const { updateField } = useFirestore(slug);
 	const [isOpen, setIsOpen] = useState(false);
-	let [color, setColor] = useState('antiquewhite');
+	// let [color, setColor] = useState('antiquewhite');
 	const colorSelectRef = useRef(null);
 	const colors = ['antiquewhite', '#2d3748', '#009688', '#afbbc9', '#9C27B0', '#FFEB3B', '#4CAF50', '#f22c54'];
-	document.body.style = `background: ${color};`;
+	document.body.style = `background: ${data.backgroundColor};`;
 
 	return (
 		<div className="relative m-2">
 			<div className="flex">
 				<button
 					className="w-10 h-10 border border-black rounded-full focus:outline-none focus:shadow-outline inline-flex p-2 shadow"
-					style={{ background: `${color}` }}
+					style={{ background: `${data.backgroundColor}` }}
 					onClick={() => setIsOpen(!isOpen)}
 				>
 					<svg className="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -27,9 +30,9 @@ function ColorPicker() {
 								return (
 									<div
 										key={thisColor}
-										className={thisColor === color ? 'w-5 h-5 rounded-full m-1 ring ring-gray-300' : 'w-5 h-5 rounded-full m-1'}
+										className={thisColor === data.backgroundColor ? 'w-5 h-5 rounded-full m-1 ring ring-gray-300' : 'w-5 h-5 rounded-full m-1'}
 										style={{ background: thisColor, cursor: 'pointer' }}
-										onClick={() => setColor(thisColor)}
+										onClick={() => updateField('config', 'backgroundColor', thisColor)}
 									></div>
 								);
 							})}
@@ -37,15 +40,15 @@ function ColorPicker() {
 								ref={colorSelectRef}
 								className="sr-only bottom-0"
 								type="color"
-								value={color}
-								onChange={(e) => setColor(e.target.value)}
+								value={data.backgroundColor}
+								onChange={(e) => updateField('config', 'backgroundColor', e.target.value)}
 							/>
 							<div
 								className="w-5 h-5 rounded-full m-1"
 								style={{ cursor: 'pointer' }}
 								onClick={() => (colorSelectRef.current !== null ? colorSelectRef.current.click() : console.log('Error'))}
 							>
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill={color} stroke="gray">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill={data.backgroundColor} stroke="gray">
 									<path
 										fillRule="evenodd"
 										d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
