@@ -1,6 +1,6 @@
 node_modules
-src/firebase
 src/styles/tailwind.css
 .eslintcache
 .netlify
 build
+.env
