@@ -16,14 +16,14 @@ function Enemy({ data, updateField }) {
 					id="name"
 					value={data.name}
 					type="text"
-					className="w-full text-lg text-yellow-200 font-bold rounded bg-transparent pl-1 overflow-ellipsis"
+					className="w-full text-lg text-yellow-200 placeholder-red-700 font-bold rounded bg-transparent pl-1 overflow-ellipsis"
 					placeholder="✎ Enemy..."
 					onChange={update}
 				/>
 			</Tooltip>
 			<Tooltip text={data.status} enabled={data.status?.length > 20}>
 				<input
-					className="w-full text-sm text-yellow-200 rounded bg-transparent mb-1 text-center overflow-ellipsis"
+					className="w-full text-sm text-yellow-200 placeholder-red-700 rounded bg-transparent mb-1 text-center overflow-ellipsis"
 					id="status"
 					value={data.status}
 					type="text"
@@ -34,10 +34,7 @@ function Enemy({ data, updateField }) {
 			<span className="pl-1 pr-2 bg-white rounded">
 				<Dice data={data.dice || ''} update={update} updateDice={updateDice} />
 			</span>
-			<button
-				className="absolute text-sm text-yellow-200 hover:text-yellow-300 top-2 right-2"
-				onClick={() => updateField(data.id, 'active', false)}
-			>
+			<button className="absolute text-sm text-red-700 hover:text-red-800 top-2 right-2" onClick={() => updateField(data.id, 'active', false)}>
 				<svg className="w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 					<path
 						fillRule="evenodd"
@@ -50,7 +47,7 @@ function Enemy({ data, updateField }) {
 				id="initiative"
 				value={data.initiative}
 				type="text"
-				className="absolute text-xs text-center text-yellow-200 placeholder-yellow-200 bg-transparent h-4 w-4 top-6 right-1"
+				className="absolute text-xs text-center text-red-700 placeholder-red-800 bg-transparent h-4 w-4 top-6 right-1"
 				placeholder="#"
 				onChange={update}
 			></input>
