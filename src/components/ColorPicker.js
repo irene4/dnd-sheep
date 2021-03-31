@@ -1,11 +1,9 @@
 import { useState, useRef } from 'react';
-import useFirestore from '../hooks/useFirestore';
 
-function ColorPicker({ data, slug }) {
-	data = data || { backgroundColor: 'antiquewhite'};
+function ColorPicker({ data, slug, useFirestore }) {
+	data = data || { backgroundColor: 'antiquewhite' };
 	const { updateField } = useFirestore(slug);
 	const [isOpen, setIsOpen] = useState(false);
-	// let [color, setColor] = useState('antiquewhite');
 	const colorSelectRef = useRef(null);
 	const colors = ['antiquewhite', '#2d3748', '#009688', '#afbbc9', '#9C27B0', '#FFEB3B', '#4CAF50', '#f22c54'];
 	document.body.style = `background: ${data.backgroundColor};`;
@@ -30,7 +28,11 @@ function ColorPicker({ data, slug }) {
 								return (
 									<div
 										key={thisColor}
-										className={thisColor === data.backgroundColor ? 'w-5 h-5 rounded-full m-1 ring ring-gray-300' : 'w-5 h-5 rounded-full m-1'}
+										className={
+											thisColor === data.backgroundColor
+												? 'w-5 h-5 rounded-full m-1 ring ring-gray-300'
+												: 'w-5 h-5 rounded-full m-1'
+										}
 										style={{ background: thisColor, cursor: 'pointer' }}
 										onClick={() => updateField('config', 'backgroundColor', thisColor)}
 									></div>

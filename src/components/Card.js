@@ -2,9 +2,8 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Dice from './Dice';
 import ProgressBar from './ProgressBar';
 import Tooltip from './Tooltip';
-import useFirestore from '../hooks/useFirestore';
 
-function Card({ data, slug }) {
+function Card({ data, slug, useFirestore }) {
 	const nopicUrl = 'https://i.imgur.com/ysksdxg.jpg';
 	const { updateField } = useFirestore(slug);
 	const [showUrl, setShowUrl] = useState(false);
