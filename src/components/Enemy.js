@@ -5,8 +5,8 @@ function Enemy({ data, updateField }) {
 	function update(e) {
 		updateField(data.id, e.target.id, e.target.value);
 	}
-	function updateDice(value) {
-		updateField(data.id, 'dice.lastRoll', value);
+	function updateWithoutEvent(field, value) {
+		updateField(data.id, field, value);
 	}
 
 	return (
@@ -32,7 +32,7 @@ function Enemy({ data, updateField }) {
 				/>
 			</Tooltip>
 			<span className="pl-1 pr-2 bg-white rounded">
-				<Dice data={data.dice || ''} update={update} updateDice={updateDice} />
+				<Dice data={data.dice || ''} update={update} updateWithoutEvent={updateWithoutEvent} />
 			</span>
 			<button className="absolute text-sm text-red-700 hover:text-red-800 top-2 right-2" onClick={() => updateField(data.id, 'active', false)}>
 				<svg className="w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -47,7 +47,7 @@ function Enemy({ data, updateField }) {
 				id="initiative"
 				value={data.initiative}
 				type="text"
-				className="absolute text-xs text-center text-red-700 placeholder-red-800 bg-transparent h-4 w-4 top-6 right-1 rounded"
+				className="absolute text-xs text-center text-red-700 placeholder-red-700 bg-transparent h-4 w-4 top-6 right-1 rounded"
 				placeholder="#"
 				onChange={update}
 			></input>
