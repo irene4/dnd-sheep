@@ -1,8 +1,7 @@
 import { useState, useRef } from 'react';
 
-function ColorPicker({ data, slug, useFirestore }) {
+function ColorPicker({ data, updateField }) {
 	data = data || { backgroundColor: 'antiquewhite' };
-	const { updateField } = useFirestore(slug);
 	const [isOpen, setIsOpen] = useState(false);
 	const colorSelectRef = useRef(null);
 	const colors = ['antiquewhite', '#2d3748', '#009688', '#afbbc9', '#9C27B0', '#FFEB3B', '#4CAF50', '#f22c54'];

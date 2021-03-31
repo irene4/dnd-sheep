@@ -9,7 +9,7 @@ import useFirestore from '../hooks/useFirestore';
 
 function Cards() {
 	let { slug } = useParams();
-	const { roomContent, createCard, toggleActive, deleteDocument, createConfigIfNotExists } = useFirestore(slug);
+	const { updateField, roomContent, createCard, toggleActive, deleteDocument, createConfigIfNotExists } = useFirestore(slug);
 
 	createConfigIfNotExists();
 	const selectEl = useRef(null);
@@ -21,7 +21,7 @@ function Cards() {
 					<h2 id="roomSlug" className="font-bold capitalize text-3xl text-center text-blue-800 rounded p-1">
 						{slug}
 					</h2>
-					<ColorPicker slug={slug} useFirestore={useFirestore} data={roomContent.find((doc) => doc.type === 'config')} />
+					<ColorPicker updateField={updateField} data={roomContent.find((doc) => doc.type === 'config')} />
 				</div>
 			</div>
 
@@ -31,7 +31,7 @@ function Cards() {
 						roomContent
 							.filter((doc) => doc.type === 'enemy' && doc.active === true)
 							.map((enemy) => {
-								return <Enemy key={enemy.id} data={enemy} slug={slug} useFirestore={useFirestore} />;
+								return <Enemy key={enemy.id} data={enemy} updateField={updateField} />;
 							})}
 				</div>
 
@@ -45,7 +45,7 @@ function Cards() {
 						roomContent
 							.filter((doc) => doc.type === 'player' && doc.active === true)
 							.map((player) => {
-								return <Card key={player.id} data={player} slug={slug} useFirestore={useFirestore} />;
+								return <Card key={player.id} data={player} updateField={updateField} />;
 							})
 					) : (
 						<h2>Add a player.</h2>

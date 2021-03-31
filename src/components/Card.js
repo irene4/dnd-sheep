@@ -3,9 +3,8 @@ import Dice from './Dice';
 import ProgressBar from './ProgressBar';
 import Tooltip from './Tooltip';
 
-function Card({ data, slug, useFirestore }) {
+function Card({ data, updateField }) {
 	const nopicUrl = 'https://i.imgur.com/ysksdxg.jpg';
-	const { updateField } = useFirestore(slug);
 	const [showUrl, setShowUrl] = useState(false);
 	const urlRef = useRef();
 

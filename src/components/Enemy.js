@@ -1,9 +1,7 @@
 import Dice from './Dice';
 import Tooltip from './Tooltip';
 
-function Enemy({ data, slug, useFirestore }) {
-	const { updateField } = useFirestore(slug);
-
+function Enemy({ data, updateField }) {
 	function update(e) {
 		updateField(data.id, e.target.id, e.target.value);
 	}
