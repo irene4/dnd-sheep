@@ -11,8 +11,8 @@ function Card({ data, updateField }) {
 	function update(e) {
 		updateField(data.id, e.target.id, e.target.value);
 	}
-	function updateDice(value) {
-		updateField(data.id, 'dice.lastRoll', value);
+	function updateWithoutEvent(field, value) {
+		updateField(data.id, field, value);
 	}
 	useEffect(() => {
 		let clickOutside = (e) => {
@@ -82,8 +82,8 @@ function Card({ data, updateField }) {
 					<span className="px-1">/</span>
 					<input id="hp.total" value={data.hp.total} type="text" className="rounded bg-transparent w-6" placeholder="#" onChange={update} />
 				</span>
-				<ProgressBar curr={data.hp.curr} tot={data.hp.total} />
-				<Dice data={data.dice || ''} update={update} updateDice={updateDice} />
+				<ProgressBar update={update} curr={data.hp.curr} tot={data.hp.total} updateWithoutEvent={updateWithoutEvent} />
+				<Dice data={data.dice || ''} update={update} updateWithoutEvent={updateWithoutEvent} />
 				<div className="text-left mt-1">
 					<span className="flex items-center text-xxxs">
 						<span className="text-gray-500 font-bold tracking-wider">Speed</span>
@@ -220,7 +220,7 @@ function Card({ data, updateField }) {
 				id="initiative"
 				value={data.initiative}
 				type="text"
-				className="absolute text-xs text-center text-gray-300 placeholder-gray-300 h-4 w-4 top-7 right-2"
+				className="absolute text-xs text-center text-gray-300 placeholder-gray-300 h-4 w-4 top-7 right-2 rounded"
 				placeholder="#"
 				onChange={update}
 			></input>

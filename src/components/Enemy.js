@@ -47,7 +47,7 @@ function Enemy({ data, updateField }) {
 				id="initiative"
 				value={data.initiative}
 				type="text"
-				className="absolute text-xs text-center text-red-700 placeholder-red-800 bg-transparent h-4 w-4 top-6 right-1"
+				className="absolute text-xs text-center text-red-700 placeholder-red-800 bg-transparent h-4 w-4 top-6 right-1 rounded"
 				placeholder="#"
 				onChange={update}
 			></input>
