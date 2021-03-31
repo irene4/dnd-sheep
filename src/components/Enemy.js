@@ -1,4 +1,5 @@
 import Dice from './Dice';
+import Tooltip from './Tooltip';
 import useFirestore from '../hooks/useFirestore';
 
 function Enemy({ data, slug }) {
@@ -13,22 +14,26 @@ function Enemy({ data, slug }) {
 
 	return (
 		<div className="flex sm:flex-col relative w-full sm:w-40 sm:rounded-2xl bg-red-500 items-center p-4 sm:m-2 sm:shadow-md">
-			<input
-				id="name"
-				value={data.name}
-				type="text"
-				className="w-full text-lg text-yellow-200 font-bold rounded bg-transparent pl-1 overflow-ellipsis"
-				placeholder="✎ Enemy..."
-				onChange={update}
-			/>
-			<input
-				className="w-full text-sm text-yellow-200 rounded bg-transparent mb-1 text-center"
-				id="status"
-				value={data.status}
-				type="text"
-				placeholder="Status"
-				onChange={update}
-			/>
+			<Tooltip text={data.name} enabled={data.name?.length > 15}>
+				<input
+					id="name"
+					value={data.name}
+					type="text"
+					className="w-full text-lg text-yellow-200 font-bold rounded bg-transparent pl-1 overflow-ellipsis"
+					placeholder="✎ Enemy..."
+					onChange={update}
+				/>
+			</Tooltip>
+			<Tooltip text={data.status} enabled={data.status?.length > 20}>
+				<input
+					className="w-full text-sm text-yellow-200 rounded bg-transparent mb-1 text-center overflow-ellipsis"
+					id="status"
+					value={data.status}
+					type="text"
+					placeholder="Status"
+					onChange={update}
+				/>
+			</Tooltip>
 			<span className="pl-1 pr-2 bg-white rounded">
 				<Dice data={data.dice || ''} update={update} updateDice={updateDice} />
 			</span>
