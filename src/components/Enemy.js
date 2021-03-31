@@ -12,17 +12,17 @@ function Enemy({ data, slug }) {
 	}
 
 	return (
-		<div className="flex sm:flex-col relative w-full sm:w-36 sm:rounded-2xl bg-red-500 items-center p-4 sm:m-2 sm:shadow-md">
+		<div className="flex sm:flex-col relative w-full sm:w-40 sm:rounded-2xl bg-red-500 items-center p-4 sm:m-2 sm:shadow-md">
 			<input
 				id="name"
 				value={data.name}
 				type="text"
-				className="w-full text-xl text-yellow-200 font-bold rounded bg-transparent pl-1 overflow-ellipsis"
+				className="w-full text-lg text-yellow-200 font-bold rounded bg-transparent pl-1 overflow-ellipsis"
 				placeholder="✎ Enemy..."
 				onChange={update}
 			/>
 			<input
-				className="w-full text-yellow-200 rounded bg-transparent mb-1 text-center"
+				className="w-full text-sm text-yellow-200 rounded bg-transparent mb-1 text-center"
 				id="status"
 				value={data.status}
 				type="text"
