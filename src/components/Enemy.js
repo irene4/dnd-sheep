@@ -49,6 +49,14 @@ function Enemy({ data, slug }) {
 					/>
 				</svg>
 			</button>
+			<input
+				id="initiative"
+				value={data.initiative}
+				type="text"
+				className="absolute text-xs text-center text-yellow-200 placeholder-yellow-200 bg-transparent h-4 w-4 top-6 right-1"
+				placeholder="#"
+				onChange={update}
+			></input>
 		</div>
 	);
 }
