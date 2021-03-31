@@ -27,7 +27,7 @@ function ProgressBar({ curr, tot, updateWithoutEvent }) {
 				</div>
 			</div>
 			<svg
-				onClick={() => updateWithoutEvent('hp.curr', curr + 1)}
+				onClick={() => updateWithoutEvent('hp.curr', parseInt(curr) + 1)}
 				className="h-3 cursor-pointer hover:text-gray-300"
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"
