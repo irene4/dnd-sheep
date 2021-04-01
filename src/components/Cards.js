@@ -42,7 +42,7 @@ function Cards() {
 							})}
 				</div>
 
-				<div className="flex m-auto">
+				<div className="flex w-full sm:w-auto m-auto">
 					<AddButton type="note" color="purple" createPlayer={createCard} />
 					<AddButton type="player" color="blue" createPlayer={createCard} />
 					<AddButton type="enemy" color="red" createPlayer={createCard} />
