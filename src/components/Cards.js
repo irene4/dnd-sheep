@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Card from './Card';
 import Enemy from './Enemy';
+import Note from './Note';
 import AddButton from './AddButton';
 import ColorPicker from './ColorPicker';
 import Tooltip from './Tooltip';
@@ -29,6 +30,12 @@ function Cards() {
 				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:h-full sm:m-auto">
 					{roomContent &&
 						roomContent
+							.filter((doc) => doc.type === 'note' && doc.active === true)
+							.map((note) => {
+								return <Note key={note.id} data={note} updateField={updateField} />;
+							})}
+					{roomContent &&
+						roomContent
 							.filter((doc) => doc.type === 'enemy' && doc.active === true)
 							.map((enemy) => {
 								return <Enemy key={enemy.id} data={enemy} updateField={updateField} />;
@@ -36,6 +43,7 @@ function Cards() {
 				</div>
 
 				<div className="flex m-auto">
+					<AddButton type="note" color="purple" createPlayer={createCard} />
 					<AddButton type="player" color="blue" createPlayer={createCard} />
 					<AddButton type="enemy" color="red" createPlayer={createCard} />
 				</div>

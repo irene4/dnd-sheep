@@ -99,6 +99,9 @@ const newFields = {
 		},
 		url: '',
 	},
+	note: {
+		content: '',
+	},
 };
 
 export default useFirestore;
