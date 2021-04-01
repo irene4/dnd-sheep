@@ -10,7 +10,7 @@ function Enemy({ data, updateField }) {
 	}
 
 	return (
-		<div className="flex sm:flex-col relative w-full sm:w-40 sm:rounded-2xl bg-red-500 items-center p-4 sm:m-2 sm:shadow-md">
+		<div className="flex sm:flex-col relative w-full sm:w-40 max-h-40 sm:rounded-2xl bg-red-500 justify-around items-center p-4 sm:m-2 sm:shadow-md">
 			<Tooltip text={data.name} enabled={data.name?.length > 15}>
 				<input
 					id="name"
