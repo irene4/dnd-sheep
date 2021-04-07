@@ -19,7 +19,7 @@ function Cards() {
 		<div className="pb-2">
 			<div className="flex justify-center w-full mt-2">
 				<div className="flex items-center">
-					<h2 id="roomSlug" className="font-bold capitalize text-3xl text-center text-blue-800 rounded p-1">
+					<h2 id="roomSlug" className="font-bold capitalize text-2xl sm:text-3xl text-center text-blue-800 rounded p-1">
 						{slug}
 					</h2>
 					<ColorPicker updateField={updateField} data={roomContent.find((doc) => doc.type === 'config')} />
