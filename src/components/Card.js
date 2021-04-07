@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Dice from './Dice';
 import ProgressBar from './ProgressBar';
 import Tooltip from './Tooltip';
@@ -105,14 +105,16 @@ function Card({ data, updateField }) {
 				</div>
 			</div>
 			<div className="sm:max-w-12">
-				<input
-					id="name"
-					value={data.name}
-					type="text"
-					className="text-2xl font-bold rounded bg-transparent pl-1 w-full overflow-ellipsis"
-					placeholder="✎ Character Name..."
-					onChange={update}
-				/>
+				<Tooltip text={data.name} enabled={data.name?.length > 12}>
+					<input
+						id="name"
+						value={data.name}
+						type="text"
+						className="text-2xl font-bold rounded bg-transparent pl-1 w-full overflow-ellipsis"
+						placeholder="✎ Character Name..."
+						onChange={update}
+					/>
+				</Tooltip>
 				<div className="flex flex-col">
 					<input
 						id="class"
