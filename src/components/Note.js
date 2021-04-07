@@ -4,7 +4,7 @@ function Note({ data, updateField }) {
 	}
 
 	return (
-		<div className="flex sm:flex-col relative w-full sm:w-32 sm:rounded-2xl bg-gray-100 items-center p-2 sm:p-4 sm:m-2 sm:shadow-md">
+		<div className="flex sm:flex-col relative sm:w-32 sm:rounded-2xl bg-gray-100 items-center p-2 sm:p-4 sm:m-2 sm:shadow-md">
 			<textarea
 				className="w-full h-8 sm:h-auto text-xs text-purple-500 placeholder-gray-400 rounded bg-transparent pr-1"
 				id="content"

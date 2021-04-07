@@ -27,7 +27,7 @@ function Card({ data, updateField }) {
 	}, []);
 
 	return (
-		<div className="flex relative w-full sm:w-auto sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md">
+		<div className="flex relative w-full sm:w-auto sm:rounded-2xl bg-white dark:bg-gray-800 dark:text-white p-4 pr-8 sm:m-2 sm:shadow-md">
 			<div className="flex flex-col items-center w-5/6 h-5/6">
 				<Tooltip text={data.status} enabled={data.status?.length > 15}>
 					<div className="flex h-4 text-xxs text-gray-400 align-left">
