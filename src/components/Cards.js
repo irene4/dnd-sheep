@@ -68,7 +68,7 @@ function Cards() {
 								.map((inactive) => {
 									return (
 										<option value={inactive.id} key={inactive.id}>
-											{inactive.name || inactive.id} ({inactive.type})
+											{inactive.name || inactive.content?.substr(0, 20) || inactive.id} ({inactive.type})
 										</option>
 									);
 								})}
