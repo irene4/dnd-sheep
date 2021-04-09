@@ -4,9 +4,9 @@ function Note({ data, updateField }) {
 	}
 
 	return (
-		<div className="flex sm:flex-col relative sm:w-32 sm:rounded-2xl bg-gray-100 items-center p-2 sm:p-4 sm:m-2 sm:shadow-md">
+		<div className="flex sm:flex-col relative sm:w-32 sm:rounded-2xl bg-white items-center p-2 sm:p-4 sm:m-2 sm:shadow-md">
 			<textarea
-				className="w-full h-8 sm:h-auto text-xs text-purple-500 placeholder-gray-400 rounded bg-transparent pr-1"
+				className="w-11/12 sm:w-full h-8 sm:h-auto text-xs text-purple-500 placeholder-gray-400 rounded bg-transparent pr-1"
 				id="content"
 				value={data.content}
 				type="text"
@@ -17,7 +17,7 @@ function Note({ data, updateField }) {
 			/>
 
 			<button
-				className="absolute h-full bg-gray-300 hover:bg-gray-400 text-sm text-purple-500 hover:text-purple-600 px-2 sm:px-0 right-0 sm:top-2 sm:right-2"
+				className="absolute h-full sm:h-auto bg-white text-sm text-purple-500 hover:text-purple-600 px-2 sm:px-0 right-0 sm:top-2 sm:right-2"
 				onClick={() => updateField(data.id, 'active', false)}
 			>
 				<svg className="w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
