@@ -1,7 +1,6 @@
-# dnd-sheep
+# Dnd Sheep
 
-## setup an .env file for the firebase secrets
-get the secrets from sheep or make your own!
+You'll need a .env file for the Firebase keys. Get the keys from @irene4 or make your own!
 ```
 #.env file
 REACT_APP_FIREBASE_API_KEY=
