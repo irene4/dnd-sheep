@@ -87,11 +87,11 @@ function Card({ data, updateField }) {
 				<div className="text-left mt-1">
 					<span className="flex items-center text-xxxs">
 						<span className="text-gray-500 font-bold tracking-wider">Speed</span>
-						<input className="w-4 ml-1" type="text" placeholder="#" />
+						<input id="speed" value={data.speed} type="text" className="w-4 ml-1" placeholder="#" onChange={update} />
 					</span>
 					<span className="flex items-center text-xxxs">
 						<span className="text-gray-500 font-bold tracking-wider">Armor Class</span>
-						<input className="w-4 ml-1" type="text" placeholder="#" />
+						<input id="armor" value={data.armor} type="text" className="w-4 ml-1" placeholder="#" onChange={update} />
 					</span>
 					<span className="flex items-center text-xxxs">
 						<span className="text-gray-500 font-bold tracking-wider">Hit Dice</span>
