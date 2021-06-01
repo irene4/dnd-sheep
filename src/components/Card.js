@@ -95,7 +95,7 @@ function Card({ data, updateField }) {
 					</span>
 					<span className="flex items-center text-xxxs">
 						<span className="text-gray-500 font-bold tracking-wider">Hit Dice</span>
-						<select id="hitDice" value={data.hitDice}>
+						<select id="hitDice" value={data.hitDice} onChange={update}>
 							<option>d12</option>
 							<option>d10</option>
 							<option>d8</option>
