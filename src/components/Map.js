@@ -1,5 +1,9 @@
 function Map() {
-	return <div></div>;
+	return (
+		<div>
+			<canvas></canvas>
+		</div>
+	);
 }
 
 export default Map;
