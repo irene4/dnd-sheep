@@ -3,6 +3,7 @@ import Dice from './Dice';
 import ProgressBar from './ProgressBar';
 import Tooltip from './Tooltip';
 import useFirestore from '../hooks/useFirestore';
+import ReactiveInput from './ReactiveInput';
 
 function Card({ data, slug }) {
 	const nopicUrl = 'https://i.imgur.com/ysksdxg.jpg';
@@ -11,6 +12,7 @@ function Card({ data, slug }) {
 	const urlRef = useRef();
 
 	function update(e) {
+		console.log(document.activeElement.selectionEnd);
 		updateField(data.id, e.target.id, e.target.value);
 	}
 	function updateDice(value) {
@@ -189,13 +191,13 @@ function Card({ data, slug }) {
 						></input>
 					</div>
 					<label className="font-bold tracking-wider uppercase text-xs">Actions</label>
-					<textarea
+					<ReactiveInput
 						id="actions"
 						value={data.actions}
 						className="text-xs rounded-md px-1 border"
 						placeholder="Actions..."
 						onChange={update}
-					></textarea>
+					></ReactiveInput>
 					<label className="font-bold tracking-wider uppercase text-xs">Notes</label>
 					<textarea
 						id="notes"
