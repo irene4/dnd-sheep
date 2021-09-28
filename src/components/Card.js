@@ -1,21 +1,19 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Dice from './Dice';
 import ProgressBar from './ProgressBar';
 import Tooltip from './Tooltip';
-import useFirestore from '../hooks/useFirestore';
 import ReactiveInput from './ReactiveInput';
 
-function Card({ data, slug }) {
+function Card({ data, updateField }) {
 	const nopicUrl = 'https://i.imgur.com/ysksdxg.jpg';
-	const { updateField } = useFirestore(slug);
 	const [showUrl, setShowUrl] = useState(false);
 	const urlRef = useRef();
 
 	function update(e) {
 		updateField(data.id, e.target.id, e.target.value);
 	}
-	function updateDice(value) {
-		updateField(data.id, 'dice.lastRoll', value);
+	function updateWithoutEvent(field, value) {
+		updateField(data.id, field, value);
 	}
 	useEffect(() => {
 		let clickOutside = (e) => {
@@ -30,7 +28,7 @@ function Card({ data, slug }) {
 	}, []);
 
 	return (
-		<div className="flex relative w-full sm:w-auto sm:rounded-2xl bg-white p-4 pr-8 sm:m-2 sm:shadow-md">
+		<div className="flex relative w-full sm:w-auto sm:rounded-2xl bg-white dark:bg-gray-800 dark:text-white p-4 pr-8 sm:m-2 sm:shadow-md">
 			<div className="flex flex-col items-center w-5/6 h-5/6">
 				<Tooltip text={data.status} enabled={data.status?.length > 15}>
 					<div className="flex h-4 text-xxs text-gray-400 align-left">
@@ -85,20 +83,20 @@ function Card({ data, slug }) {
 					<span className="px-1">/</span>
 					<input id="hp.total" value={data.hp.total} type="text" className="rounded bg-transparent w-6" placeholder="#" onChange={update} />
 				</span>
-				<ProgressBar curr={data.hp.curr} tot={data.hp.total} />
-				<Dice data={data.dice || ''} update={update} updateDice={updateDice} />
+				<ProgressBar update={update} curr={data.hp.curr} tot={data.hp.total} updateWithoutEvent={updateWithoutEvent} />
+				<Dice data={data.dice || ''} update={update} updateWithoutEvent={updateWithoutEvent} />
 				<div className="text-left mt-1">
 					<span className="flex items-center text-xxxs">
 						<span className="text-gray-500 font-bold tracking-wider">Speed</span>
-						<input className="w-4 ml-1" type="text" placeholder="#" />
+						<input id="speed" value={data.speed} type="text" className="w-4 ml-1" placeholder="#" onChange={update} />
 					</span>
 					<span className="flex items-center text-xxxs">
 						<span className="text-gray-500 font-bold tracking-wider">Armor Class</span>
-						<input className="w-4 ml-1" type="text" placeholder="#" />
+						<input id="armor" value={data.armor} type="text" className="w-4 ml-1" placeholder="#" onChange={update} />
 					</span>
 					<span className="flex items-center text-xxxs">
 						<span className="text-gray-500 font-bold tracking-wider">Hit Dice</span>
-						<select>
+						<select id="hitDice" value={data.hitDice} onChange={update}>
 							<option>d12</option>
 							<option>d10</option>
 							<option>d8</option>
@@ -108,14 +106,16 @@ function Card({ data, slug }) {
 				</div>
 			</div>
 			<div className="sm:max-w-12">
-				<input
-					id="name"
-					value={data.name}
-					type="text"
-					className="text-2xl font-bold rounded bg-transparent pl-1 w-full overflow-ellipsis"
-					placeholder="✎ Character Name..."
-					onChange={update}
-				/>
+				<Tooltip text={data.name} enabled={data.name?.length > 12}>
+					<input
+						id="name"
+						value={data.name}
+						type="text"
+						className="text-2xl font-bold rounded bg-transparent pl-1 w-full overflow-ellipsis"
+						placeholder="✎ Character Name..."
+						onChange={update}
+					/>
+				</Tooltip>
 				<div className="flex flex-col">
 					<input
 						id="class"
@@ -219,6 +219,14 @@ function Card({ data, slug }) {
 					/>
 				</svg>
 			</button>
+			<input
+				id="initiative"
+				value={data.initiative}
+				type="text"
+				className="absolute text-xs text-center text-gray-300 placeholder-gray-300 h-4 w-4 top-7 right-2 rounded"
+				placeholder="#"
+				onChange={update}
+			></input>
 		</div>
 	);
 }

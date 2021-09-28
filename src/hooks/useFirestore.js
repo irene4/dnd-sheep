@@ -5,14 +5,17 @@ const useFirestore = (room) => {
 	const [roomContent, setRoomContent] = useState([]);
 
 	function createConfigIfNotExists() {
-		db.collection(room).doc('config').get().then(config => {
-			if (!config.exists) {
-				db.collection(room).doc('config').set({
-					type: 'config',
-					backgroundColor: 'antiquewhite',
-				});
-			}
-		});
+		db.collection(room)
+			.doc('config')
+			.get()
+			.then((config) => {
+				if (!config.exists) {
+					db.collection(room).doc('config').set({
+						type: 'config',
+						backgroundColor: 'antiquewhite',
+					});
+				}
+			});
 	}
 
 	useEffect(() => {
@@ -72,6 +75,7 @@ const newFields = {
 		actions: '',
 		notes: '',
 		status: '',
+		initiative: '',
 		hp: {
 			total: null,
 			curr: null,
@@ -86,13 +90,17 @@ const newFields = {
 		name: '',
 		class: '',
 		type: '',
-		status: '',
 		notes: '',
+		status: '',
+		initiative: '',
 		dice: {
 			lastRoll: 0,
 			sides: 20,
 		},
 		url: '',
+	},
+	note: {
+		content: '',
 	},
 };
 

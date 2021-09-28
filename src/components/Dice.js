@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 
-function Dice({ data, update, updateDice }) {
+function Dice({ data, update, updateWithoutEvent }) {
 	const initialMount = useRef(true);
 	const [rollColor, setRollColor] = useState('purple-500');
 	function rollDice() {
-		updateDice(Math.floor(Math.random() * data.sides + 1));
+		updateWithoutEvent('dice.lastRoll', Math.floor(Math.random() * data.sides + 1));
 	}
 	function handleChange(e) {
 		update(e);

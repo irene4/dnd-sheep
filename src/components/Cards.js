@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Card from './Card';
 import Enemy from './Enemy';
+import Note from './Note';
 import AddButton from './AddButton';
 import ColorPicker from './ColorPicker';
 import Tooltip from './Tooltip';
@@ -9,7 +10,7 @@ import useFirestore from '../hooks/useFirestore';
 
 function Cards() {
 	let { slug } = useParams();
-	const { roomContent, createCard, toggleActive, deleteDocument, createConfigIfNotExists } = useFirestore(slug);
+	const { updateField, roomContent, createCard, toggleActive, deleteDocument, createConfigIfNotExists } = useFirestore(slug);
 
 	createConfigIfNotExists();
 	const selectEl = useRef(null);
@@ -18,10 +19,10 @@ function Cards() {
 		<div className="pb-2">
 			<div className="flex justify-center w-full mt-2">
 				<div className="flex items-center">
-					<h2 id="roomSlug" className="font-bold capitalize text-3xl text-center text-blue-800 rounded p-1">
+					<h2 id="roomSlug" className="font-bold capitalize text-2xl sm:text-3xl text-center text-blue-800 rounded p-1">
 						{slug}
 					</h2>
-					<ColorPicker slug={slug} data={roomContent.find(doc => doc.type === 'config')} />
+					<ColorPicker updateField={updateField} data={roomContent.find((doc) => doc.type === 'config')} />
 				</div>
 			</div>
 
@@ -29,26 +30,36 @@ function Cards() {
 				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:h-full sm:m-auto">
 					{roomContent &&
 						roomContent
+							.filter((doc) => doc.type === 'note' && doc.active === true)
+							.map((note) => {
+								return <Note key={note.id} data={note} updateField={updateField} />;
+							})}
+					{roomContent &&
+						roomContent
 							.filter((doc) => doc.type === 'enemy' && doc.active === true)
 							.map((enemy) => {
-								return <Enemy key={enemy.id} data={enemy} slug={slug} />;
+								return <Enemy key={enemy.id} data={enemy} updateField={updateField} />;
 							})}
 				</div>
 
-				<div className="flex m-auto">
+				<div className="flex w-full sm:w-auto m-auto">
+					<AddButton type="note" color="purple" createPlayer={createCard} />
 					<AddButton type="player" color="blue" createPlayer={createCard} />
 					<AddButton type="enemy" color="red" createPlayer={createCard} />
 				</div>
 
 				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:h-full justify-center items-center">
-					{roomContent &&
+					{roomContent.length > 1 ? (
 						roomContent
 							.filter((doc) => doc.type === 'player' && doc.active === true)
 							.map((player) => {
-								return <Card key={player.id} data={player} slug={slug} />;
-							})}
+								return <Card key={player.id} data={player} updateField={updateField} />;
+							})
+					) : (
+						<h2>Add a player.</h2>
+					)}
 				</div>
-				{roomContent && (
+				{roomContent.length > 1 && (
 					<div className="flex flex-row justify-center space-x-2">
 						<select ref={selectEl} defaultValue="default" className="text-xs text-gray-400 rounded-md p-1 w-36">
 							<option value="default">Restore or destroy...</option>
@@ -57,7 +68,7 @@ function Cards() {
 								.map((inactive) => {
 									return (
 										<option value={inactive.id} key={inactive.id}>
-											{inactive.name || inactive.id} ({inactive.type})
+											{inactive.name || inactive.content?.substr(0, 20) || inactive.id} ({inactive.type})
 										</option>
 									);
 								})}
@@ -98,7 +109,6 @@ function Cards() {
 										d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
 									/>
 								</svg>
-
 							</div>
 						</Tooltip>
 					</div>
