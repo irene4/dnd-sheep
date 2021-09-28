@@ -12,7 +12,6 @@ function Card({ data, slug }) {
 	const urlRef = useRef();
 
 	function update(e) {
-		console.log(document.activeElement.selectionEnd);
 		updateField(data.id, e.target.id, e.target.value);
 	}
 	function updateDice(value) {
