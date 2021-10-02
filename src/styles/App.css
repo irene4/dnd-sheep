@@ -23,3 +23,10 @@ input {
 	background-color: rgba(0, 0, 0, 0.6);
 	display: none;
 }
+
+rect.btn {
+  stroke:#fff;
+  fill:#fff;
+  fill-opacity:0;
+  stroke-opacity:0;
+}

@@ -30,7 +30,6 @@ function CardFront({ data, updateField, onFlipClicked }) {
 	return (
     <div className="flex relative w-full sm:w-auto sm:rounded-2xl bg-white dark:bg-gray-800 dark:text-white p-4 pr-8 sm:m-2 sm:shadow-md">
       <div className="flex flex-col items-center w-5/6 h-5/6">
-        <button type="button" onClick={() => onFlipClicked()}>flip</button>
         <Tooltip text={data.status} enabled={data.status?.length > 15}>
           <div className="flex h-4 text-xxs text-gray-400 align-left">
             <svg className="h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -218,6 +217,13 @@ function CardFront({ data, updateField, onFlipClicked }) {
             d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
             clipRule="evenodd"
           />
+        </svg>
+      </button>
+      <button
+        className="absolute text-sm text-gray-200 hover:text-gray-300 bottom-2 right-2"
+        onClick={() => onFlipClicked()}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" fill="#000000"><g transform=""><g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none"><path d="M0,172v-172h172v172z" fill="none"></path><path d="" fill="none"></path><path d="" fill="none"></path><g fill="#cccccc"><path d="M86,17.2c-37.96094,0 -68.8,30.83906 -68.8,68.8c-0.01344,1.23625 0.63156,2.39188 1.70656,3.02344c1.075,0.61813 2.39187,0.61813 3.46687,0c1.075,-0.63156 1.72,-1.78719 1.70656,-3.02344c0,-34.23875 27.68125,-61.92 61.92,-61.92c21.48656,0 40.33938,10.93813 51.45219,27.52h-23.93219c-1.23625,-0.01344 -2.39187,0.63156 -3.02344,1.70656c-0.61813,1.075 -0.61813,2.39187 0,3.46687c0.63156,1.075 1.78719,1.72 3.02344,1.70656h34.4v-34.4c0.01344,-0.92719 -0.34937,-1.8275 -1.00781,-2.48594c-0.65844,-0.65844 -1.55875,-1.02125 -2.48594,-1.00781c-1.89469,0.04031 -3.41312,1.59906 -3.38625,3.49375v20.68031c-12.56406,-16.72969 -32.54562,-27.56031 -55.04,-27.56031zM151.30625,82.50625c-1.89469,0.04031 -3.41312,1.59906 -3.38625,3.49375c0,34.23875 -27.68125,61.92 -61.92,61.92c-21.48656,0 -40.35281,-10.93812 -51.45219,-27.52h23.93219c1.23625,0.02688 2.39188,-0.63156 3.02344,-1.69312c0.61813,-1.075 0.61813,-2.40531 0,-3.48031c-0.63156,-1.06156 -1.78719,-1.72 -3.02344,-1.70656h-29.42812c-0.44344,-0.08062 -0.88688,-0.08062 -1.33031,0h-3.64156v34.4c-0.01344,1.23625 0.63156,2.39188 1.70656,3.02344c1.075,0.61813 2.39187,0.61813 3.46687,0c1.075,-0.63156 1.72,-1.78719 1.70656,-3.02344v-20.69375c12.55063,16.72969 32.54563,27.57375 55.04,27.57375c37.96094,0 68.8,-30.83906 68.8,-68.8c0.01344,-0.92719 -0.34937,-1.8275 -1.00781,-2.48594c-0.65844,-0.65844 -1.55875,-1.02125 -2.48594,-1.00781z"></path></g></g></g>
         </svg>
       </button>
       <input
